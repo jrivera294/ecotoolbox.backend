@@ -15,3 +15,28 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+Route::group(array('prefix' => 'api'), function()
+{
+
+    /******************** Puntos *********************/
+
+    //Obtiene los puntos cercanos a una latitud y longitud determinada
+    Route::get('nearbyPoints/{lat}/{lng}/{radius}', array('as' => 'getNearbyPoints', 'uses' => 'pointsController@getNearbyPoints'));
+
+    //Obtiene el detalle de un punto determinado
+    Route::get('points/{id}', array('as' => 'getPoints', 'uses' => 'pointsController@getPoints'));
+
+    //Añade un punto a la base de datos
+    Route::post('points', array('as' => 'postPoints', 'uses' => 'pointsController@postPoints'));
+
+    /******************** Usuarios *********************/
+    //Añade un usuario a la base de datos
+    //Route::post('users/', array('as' => 'postUsers', 'uses' => 'pointsController@postUsers'));
+
+    /******************** Reportes *********************/
+    //Añade un reporte a la base de datos
+    //Route::post('points/{id}/report', array('as' => 'postReports', 'uses' => 'pointsController@postReports'));
+});
+
+
